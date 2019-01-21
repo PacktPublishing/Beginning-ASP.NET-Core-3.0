@@ -18,45 +18,44 @@ By the end of the course, you will build your skills to meet the demands of mode
 ## Instructions and Navigation
 ### Assumed Knowledge
 To fully benefit from the coverage included in this course, you will need:<br/>
-To fully benefit from the coverage included in this course, you will need:
-●	Prior working knowledge of C#
-●	Familiarity with HTML, CSS, and JavaScript
-●	Experience with relational databases and table data structures
-●	Experience with Git and GitHub
-●	Command Line Interface knowledge
+●	Prior working knowledge of C#<br/>
+●	Familiarity with HTML, CSS, and JavaScript<br/>
+●	Experience with relational databases and table data structures<br/>
+●	Experience with Git and GitHub<br/>
+●	Command Line Interface knowledge<br/>
 
-### Technical Requirements
+### Technical Requirements<br/>
 This course has the following software requirements:<br/>
-This course builds out all the required software needed to complete the course.
-However, as of 10/28/2018 ASP.NET Core 3.0 isn’t ready for public consumption. I gloss over the install in video 1.2. NuGet packages for ASP.NET 3.0 aren’t on the public server. So you have to compile them yourself and add the local copies of these files to a NuGet.config file. To really develop this, you will need to perform the following steps:
-1)	Install .NET Core SDK
-2)	Install VS Code
-3)	Install VS 2017 (Community Edition should work, I tested on Enterprise)
-a.	Install the following Workloads:
-i.	.NET Desktop Development
-ii.	Desktop Development with C++
-1.	Include the following options
-a.	Windows 8.1 SDK
-b.	Windows 10 SDK (10.0.15063.0) for Desktop C++
-c.	VC++ 2015.3 v14.00 (v140) toolset for desktop
-iii.	Visual Studio extension development
-iv.	.NET Core cross-platform development
-4)	Install Git
-5)	Install Node.js (I use version 11, but one of the 8’s should work fine too)
-6)	git clone --recursive https://github.com/aspnet/AspNetCore
-7)	Build from this source with a build number of 10062 (this will take ~20 minutes)
-a.	C:\src\aspnet\AspNetCore\build.cmd /p:Configuration=Release /p:BuildNumber=10062 /p:SkipTests=true
-8)	Update the NuGet.config in the %appdir%/NuGet/ folder to be as follows:
-<?xml version="1.0" encoding="utf-8"?>
-<configuration>
-    <packageSources>
-        <clear />
-        <add key="MyBuildOfAspNetCore" value="C:\src\aspnet\AspNetCore\artifacts\build\" />
-        <add key="NuGet.org" value="https://api.nuget.org/v3/index.json" />
-    </packageSources>
-</configuration>
-Once these steps have been completed you should be able to follow along with the videos. This is only temporary until more final builds of ASP.NET Core 3.0 and the .NET Core 3.0 SDK come along.
-Note: As of December 4th, ASP.NET Core 3.0 Preview 1 has been released. The videos are updated for that release. The above pre-requisite is no longer needed, and you can return the NuGet back to the way it was previously. All you need to do is to install the preview from https://dotnet.microsoft.com/download/dotnet-core/3.0
+This course builds out all the required software needed to complete the course.<br/>
+However, as of 10/28/2018 ASP.NET Core 3.0 isn’t ready for public consumption. I gloss over the install in video 1.2. NuGet packages for ASP.NET 3.0 aren’t on the public server. So you have to compile them yourself and add the local copies of these files to a NuGet.config file. To really develop this, you will need to perform the following steps:<br/>
+1)	Install .NET Core SDK<br/>
+2)	Install VS Code<br/>
+3)	Install VS 2017 (Community Edition should work, I tested on Enterprise)<br/>
+a.	Install the following Workloads:<br/>
+i.	.NET Desktop Development<br/>
+ii.	Desktop Development with C++<br/>
+1.	Include the following options<br/>
+a.	Windows 8.1 SDK<br/>
+b.	Windows 10 SDK (10.0.15063.0) for Desktop C++<br/>
+c.	VC++ 2015.3 v14.00 (v140) toolset for desktop<br/>
+iii.	Visual Studio extension development<br/><br/>
+iv.	.NET Core cross-platform development<br/>
+4)	Install Git<br/>
+5)	Install Node.js (I use version 11, but one of the 8’s should work fine too)<br/>
+6)	git clone --recursive https://github.com/aspnet/AspNetCore<br/>
+7)	Build from this source with a build number of 10062 (this will take ~20 minutes)<br/>
+a.	C:\src\aspnet\AspNetCore\build.cmd /p:Configuration=Release /p:BuildNumber=10062 /p:SkipTests=true<br/>
+8)	Update the NuGet.config in the %appdir%/NuGet/ folder to be as follows:<br/>
+<?xml version="1.0" encoding="utf-8"?><br/>
+<configuration><br/>
+    <packageSources><br/>
+        <clear /><br/>
+        <add key="MyBuildOfAspNetCore" value="C:\src\aspnet\AspNetCore\artifacts\build\" /><br/>
+        <add key="NuGet.org" value="https://api.nuget.org/v3/index.json" /><br/>
+    </packageSources><br/>
+</configuration><br/>
+Once these steps have been completed you should be able to follow along with the videos. This is only temporary until more final builds of ASP.NET Core 3.0 and the .NET Core 3.0 SDK come along.<br/>
+Note: As of December 4th, ASP.NET Core 3.0 Preview 1 has been released. The videos are updated for that release. The above pre-requisite is no longer needed, and you can return the NuGet back to the way it was previously. All you need to do is to install the preview from https://dotnet.microsoft.com/download/dotnet-core/3.0<br/>
 
 
 ## Related Products
