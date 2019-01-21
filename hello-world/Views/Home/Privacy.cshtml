@@ -1,0 +1,31 @@
+﻿@model User
+@{
+    ViewData["Title"] = "Privacy Policy";
+    ViewData["My String Key"] = "MY String Value";
+}
+<h1>@ViewData["Title"]</h1>
+<p>@Model.Fullname</p>
+<p>@ViewBag?.Title</p>
+<p>@ViewData["My String Key"]</p>
+<p>Use this page to detail your site's privacy policy.</p>
+
+<form asp-action="Privacy" asp-controller="Home" method="post">
+    <div>
+        <label asp-for="Username"></label>
+        <input asp-for="Username" />
+        <span asp-validation-for="Username"></span>
+    </div>
+    <div>
+        <label asp-for="Fullname"></label>
+        <input asp-for="Fullname" />
+        <span asp-validation-for="Fullname"></span>
+    </div>
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>

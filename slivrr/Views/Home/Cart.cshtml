@@ -1,0 +1,29 @@
+@model slivrr.Models.CartViewModel
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Cost</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.CartItems)
+        {
+            <tr>
+                <td>@item.Item.Product.Name</td>
+                <td>@item.Quantity</td>
+                <td>@item.getTotalPrice().ToString("C")</td>
+                <td><a asp-action="RemoveFromCart" 
+                    asp-controller="Home" 
+                    asp-route-itemId="@item.Item.Id">Remove</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<h5>Total: @Model.OrderTotal.ToString("C")</h5>

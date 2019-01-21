@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@ViewData["Title"] - slivrr</title>
+    <link rel="stylesheet" href="~/css/main.css">
+</head>
+<body>
+    <header><a href="/">slivrr</a><a href="#">Logout</a></header>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a class="nav-item" asp-page="/Admin/Index">Admin Home</a></li>
+                <li><a class="nav-item" asp-page="/Admin/Add">Add a Watch</a></li>
+            </ul>
+        </nav>
+        <main>@RenderBody()</main>
+    </div>
+</body>
+</html>

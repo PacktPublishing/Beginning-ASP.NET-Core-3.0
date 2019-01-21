@@ -1,0 +1,26 @@
+@model slivrr.Models.DetailsViewModel;
+@{
+    ViewData["Title"] = "Details for " + Model.Product.Name;
+}
+
+<div class="text-center">
+    <h1 class="display-4">@Model.Product.Name</h1>
+    <img src="@($"/images/{Model.Product.Id}.jpg")" alt="@Model.Product.Name"
+        class="img-thumbnail" 
+        height="320" width="320" />
+    <p>@Model.Product.Description</p>
+    <p>@Model.Product.Item.Price.ToString("C")</p>
+    <dl>
+        @foreach(var category in Model.Categories)
+        {
+            <dt>@category.Name</dt>
+            <dd>@category.Description</dd>
+        }
+    </dl>
+    <div>
+        <a class="btn btn-primary" 
+            asp-action="AddToCart" 
+            asp-controller="Home" 
+            asp-route-itemId="@Model.Product.ItemId">Add to cart</a>
+    </div>
+</div>
