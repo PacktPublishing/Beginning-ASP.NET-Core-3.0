@@ -1,6 +1,53 @@
 @page
+@model slivrr.Pages.IndexModel
 @{
     ViewData["Title"] = "Admin Home";
 }
 
-<h3>Hello, world!</h3>
+
+<h3>Admin Home</h3>
+
+<table>
+    <caption>Watches</caption>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var watch in Model.Watches)
+        {
+            <tr>
+                <td>@watch.Name</td>
+                <td>@watch.Description</td>
+                <td>@watch.Item.Price.ToString("C",
+                    CultureInfo.CreateSpecificCulture("en-US"))</td>
+                <td><a asp-page="/Admin/EditWatch" asp-route-id="@watch.Id">Edit</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<table>
+    <caption>Categories</caption>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var cat in Model.Categories)
+        {
+            <tr>
+                <td>@cat.Name</td>
+                <td>@cat.Description</td>
+                <td><a asp-page="/Admin/AddCategory" asp-route-id="@cat.Id">Edit</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

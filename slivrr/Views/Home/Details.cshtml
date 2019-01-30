@@ -9,7 +9,8 @@
         class="img-thumbnail" 
         height="320" width="320" />
     <p>@Model.Product.Description</p>
-    <p>@Model.Product.Item.Price.ToString("C")</p>
+    <p>@Model.Product.Item.Price.ToString("C",
+            CultureInfo.CreateSpecificCulture("en-US"))</p>
     <dl>
         @foreach(var category in Model.Categories)
         {

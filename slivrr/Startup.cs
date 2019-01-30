@@ -34,11 +34,17 @@ namespace slivrr
             });
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc()
+                .AddRazorPagesOptions( options => {
+                    options.Conventions.AuthorizeFolder("/Admin");
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=slivrr;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddDbContext<TimepieceContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection"))
+            );
 
-            services.AddDbContext<TimepieceContext>(options => options.UseSqlServer(connection));
+            services.BuildServiceProvider().GetService<TimepieceContext>().Database.Migrate();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,7 +64,7 @@ namespace slivrr
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

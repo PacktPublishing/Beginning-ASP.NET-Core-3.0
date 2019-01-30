@@ -1,6 +1,59 @@
 @page
+@model slivrr.Pages.AddPageModel
 @{
     ViewData["Title"] = "Add a Watch";
 }
 
 <h3>Add a Watch!</h3>
+
+<form method="post" enctype="multipart/form-data">
+    <label asp-for="AIM.Name"></label>
+    <input asp-for="AIM.Name" />
+    <span asp-validation-for="AIM.Name"></span>
+    <br />
+    <label asp-for="AIM.Description"></label>
+    <input asp-for="AIM.Description" />
+    <span asp-validation-for="AIM.Description"></span>
+    <br />
+    <label asp-for="AIM.Price"></label>
+    <input asp-for="AIM.Price" />
+    <span asp-validation-for="AIM.Price"></span>
+    <br />
+    <label asp-for="AIM.QuantityInStock"></label>
+    <input asp-for="AIM.QuantityInStock" />
+    <span asp-validation-for="AIM.QuantityInStock"></span>
+    <br />
+    <label asp-for="AIM.Picture"></label>
+    <input asp-for="AIM.Picture" />
+    <span asp-validation-for="AIM.Picture"></span>
+    <br />
+    @foreach(var category in Model.Categories)
+    {
+        <input type="checkbox" id="category-@category.Id" 
+                name="Category" />
+        <label for="category-@category.Id">@category.Name</label>
+        <br />
+    }
+    <input type="hidden" asp-for="AIM.Categories" value="" />
+    <input type="submit" value="Save" onclick="buildCatIdList()" />
+</form>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        function buildCatIdList() {
+            const categories = document.getElementsByName("Category");
+            const catIds = [];
+            for (var i = 0; i < categories.length; i++)
+            {
+                var cat = categories[i];
+                if (cat.checked) {
+                    catIds.push(cat.id.split("-")[1]);
+                }
+            }
+
+            document.getElementById("AIM_Categories").value = 
+                catIds.join(",");
+        }
+    </script>
+}

@@ -18,7 +18,8 @@
             <tr>
                 <td>@item.Item.Product.Name</td>
                 <td>@item.Quantity</td>
-                <td>@item.getTotalPrice().ToString("C")</td>
+                <td>@item.getTotalPrice().ToString("C",
+                    CultureInfo.CreateSpecificCulture("en-US"))</td>
                 <td><a asp-action="RemoveFromCart" 
                     asp-controller="Home" 
                     asp-route-itemId="@item.Item.Id">Remove</a></td>
@@ -26,4 +27,5 @@
         }
     </tbody>
 </table>
-<h5>Total: @Model.OrderTotal.ToString("C")</h5>
+<h5>Total: @Model.OrderTotal.ToString("C",
+    CultureInfo.CreateSpecificCulture("en-US"))</h5>

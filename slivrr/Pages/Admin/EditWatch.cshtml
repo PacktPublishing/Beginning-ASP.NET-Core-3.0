@@ -1,0 +1,54 @@
+@page
+@model slivrr.Pages.EditWatchPageModel
+@{
+    ViewData["Title"] = "Edit - " + Model.AIM.Name;
+}
+<h3>Edit @Model.AIM.Name</h3>
+<form method="post">
+    <label asp-for="AIM.Name"></label>
+    <input asp-for="AIM.Name" />
+    <span asp-validation-for="AIM.Name"></span>
+    <br />
+    <label asp-for="AIM.Description"></label>
+    <input asp-for="AIM.Description" />
+    <span asp-validation-for="AIM.Description"></span>
+    <br />
+    <label asp-for="AIM.Price"></label>
+    <input asp-for="AIM.Price" />
+    <span asp-validation-for="AIM.Price"></span>
+    <br />
+    <label asp-for="AIM.QuantityInStock"></label>
+    <input asp-for="AIM.QuantityInStock" />
+    <span asp-validation-for="AIM.QuantityInStock"></span>
+    <br />
+    @foreach (var category in Model.Categories)
+    {
+        var isChecked = Model.ProductCategories.Contains(category.Id);
+        <input type="checkbox" id="category-@category.Id"
+                name="Category" checked="@isChecked" />
+        <label for="category-@category.Id">@category.Name</label>
+        <br />
+    }
+    <input type="hidden" asp-for="AIM.Categories" value="" />
+    <input type="submit" value="Save" onclick="buildCatIdList()" />
+</form>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        function buildCatIdList() {
+            const categories = document.getElementsByName("Category");
+            const catIds = [];
+
+            for (let i = 0; i < categories.length; i++) {
+                const cat = categories[i];
+                if (cat.checked) {
+                    catIds.push(cat.id.split("-")[1]);
+                }
+            }
+
+            document.getElementById("AIM_Categories").value = 
+                    catIds.join(",");
+        }
+    </script>
+}

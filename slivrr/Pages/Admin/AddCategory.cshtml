@@ -1,0 +1,53 @@
+@page
+@using Microsoft.EntityFrameworkCore
+@inject TimepieceContext _Context
+@{
+    ViewData["Title"] = "Add a Category";
+}
+<h3>Add a Category</h3>
+<form method="post">
+    <label asp-for="Category.Name">Category to Add</label>
+    <input asp-for="Category.Name" />
+    <span asp-validation-for="Category.Name"></span>
+    <br />
+    <label asp-for="Category.Description">Description of the Category</label>
+    <input asp-for="Category.Description" />
+    <span asp-validation-for="Category.Description"></span>
+    <br />
+    <input type="submit" value="Save" />
+</form>
+
+@functions
+{
+    public void OnGet(int? id)
+    {
+        if (id != null)
+        {
+            Category = _Context.Categories.FirstOrDefault(c => c.Id == id);
+        }
+    }
+
+    [BindProperty()]
+    public Category Category { get; set; }
+
+    public IActionResult OnPost(int? id)
+    {
+        if (ModelState.IsValid)
+        {
+            if (id != null)
+            {
+                var cat = _Context.Categories.FirstOrDefault(c => c.Id == id);
+                cat.Name = Category.Name;
+                cat.Description = Category.Description;
+
+                _Context.SaveChanges();
+            }
+            else
+            {
+                _Context.Categories.Add(Category);
+                _Context.SaveChanges();
+            }
+        }
+        return RedirectToPage("Index");
+    }
+}

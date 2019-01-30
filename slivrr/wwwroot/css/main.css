@@ -61,3 +61,17 @@ main {
     width: calc(100vw - 200px);
     padding: 50px;
 }
+
+table {
+    border: 1px solid #212529;
+}
+
+table thead {
+    background-color: #212529;
+    color: #f8f9fa;
+    font-weight: bold;
+}
+
+table tbody td {
+    border: 1px solid #212529;
+}
