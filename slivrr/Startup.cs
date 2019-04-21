@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using slivrr.Data;
 
@@ -35,12 +36,13 @@ namespace slivrr
 
 
             services.AddMvc()
-                .AddRazorPagesOptions( options => {
+                .AddRazorPagesOptions(options =>
+                {
                     options.Conventions.AuthorizeFolder("/Admin");
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-            services.AddDbContext<TimepieceContext>(options => 
+            services.AddDbContext<TimepieceContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection"))
             );
 
@@ -48,7 +50,7 @@ namespace slivrr
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -60,16 +62,16 @@ namespace slivrr
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseRouting();
             app.UseAuthentication();
-            app.UseMvc(routes =>
+            app.UseAuthorization();
+            app.UseEndpoints(routes =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRazorPages();
             });
         }
     }

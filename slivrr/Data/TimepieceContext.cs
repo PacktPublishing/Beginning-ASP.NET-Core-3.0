@@ -12,7 +12,6 @@ namespace slivrr.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<CategoryToProduct> CategoriesToProducts { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<Item> Items { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,17 +22,38 @@ namespace slivrr.Data
             modelBuilder.Entity<Product>(
                 p => {
                     p.HasKey( w => w.Id);
-                    p.OwnsOne<Item>( w => w.Item );
-                    p.HasOne<Item>(w => w.Item)
-                        .WithOne(w => w.Product)
-                        .HasForeignKey<Item>(w => w.Id);
-                }
-            );
-
-            modelBuilder.Entity<Item>(
-                i => {
-                    i.Property(w => w.Price).HasColumnType("Money");
-                    i.HasKey(w => w.Id);
+                    p.OwnsOne<Item>( w => w.Item, i => {
+                        i.WithOwner(it => it.Product)
+                            .HasForeignKey(it => it.Id);
+                        i.Property(w => w.Price).HasColumnType("Money");
+                        i.HasKey(w => w.Id);
+                        i.HasData(
+                            new Item
+                            {
+                                Id = 1,
+                                Price = 8895.0M,
+                                QuantityInStock = 5
+                            },
+                            new Item
+                            {
+                                Id = 2,
+                                Price = 3360.0M,
+                                QuantityInStock = 8
+                            },
+                            new Item
+                            {
+                                Id = 3,
+                                Price = 17800.0M,
+                                QuantityInStock = 1
+                            },
+                            new Item
+                            {
+                                Id = 4,
+                                Price = 4300.0M,
+                                QuantityInStock = 3
+                            }
+                        );
+                    });
                 }
             );
 
@@ -62,29 +82,6 @@ namespace slivrr.Data
                     Id = 5,
                     Name = "Automatic Winding",
                     Description = "Automatic winding of the timepiece"
-                }
-            );
-
-            modelBuilder.Entity<Item>().HasData(
-                new Item {
-                    Id = 1,
-                    Price = 8895.0M,
-                    QuantityInStock = 5
-                },
-                new Item {
-                    Id = 2,
-                    Price = 3360.0M,
-                    QuantityInStock = 8
-                },
-                new Item {
-                    Id = 3,
-                    Price = 17800.0M,
-                    QuantityInStock = 1
-                },
-                new Item {
-                    Id = 4,
-                    Price = 4300.0M,
-                    QuantityInStock = 3
                 }
             );
 

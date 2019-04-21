@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Hosting;
 using slivrr.Data;
 using slivrr.Models;
 
@@ -13,9 +14,9 @@ namespace slivrr.Pages
     public class AddPageModel : PageModel
     {
         private TimepieceContext _Context;
-        private IHostingEnvironment _Env;
+        private IWebHostEnvironment _Env;
 
-        public AddPageModel (TimepieceContext context, IHostingEnvironment env)
+        public AddPageModel (TimepieceContext context, IWebHostEnvironment env)
         {
             _Context = context;
             _Env = env;
